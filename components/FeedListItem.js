@@ -34,7 +34,6 @@ function truncate(text) {
 function FeedListItem({log}) {
   const {title, body, date} = log;
 
-  console.log('feedListItem', log);
   return (
     <Pressable
       style={({pressed}) => [

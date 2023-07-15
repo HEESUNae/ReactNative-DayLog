@@ -9,3 +9,4 @@ react-native 다이어리 앱 만들기 소스코드입니다.
 - 스크롤 위치가 끝까지 도달했을때 Write 버튼 숨기기
 - 피드 수정, 삭제 기능
 - 피드 검색 기능
+- Write 페이지에서 DatePickerModal 기능 추가

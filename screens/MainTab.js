@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // components
 import FeedsScreen from './FeedsScreen';
-import CalenderScreen from './CalenderScreen';
+import CalendarScreen from './CalendarScreen';
 import SearchScreen from './SearchScreen';
 import SearchHeader from '../components/SearchHeader';
 
@@ -26,8 +26,8 @@ const MainTab = () => {
         }}
       />
       <Tab.Screen
-        name="Calender"
-        component={CalenderScreen}
+        name="Calendar"
+        component={CalendarScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="event" color={color} size={size} />

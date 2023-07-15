@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, Platform, Pressable, StyleSheet, View} from 'react-native';
+import {Animated, Platform, Pressable, StyleSheet} from 'react-native';
 
 // lib
 import {useNavigation} from '@react-navigation/native';

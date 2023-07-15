@@ -1,42 +1,13 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {createContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
+import logsStorage from '../storages/logsStorage';
 
 const LogContext = createContext();
 
 export function LogContextProvider({children}) {
-  const [logs, setLogs] = useState([
-    {
-      id: uuidv4(),
-      title: 'Log 05',
-      body: 'Log 05',
-      date: new Date().toISOString(),
-    },
-    {
-      id: uuidv4(),
-      title: 'Log 04',
-      body: 'Log 04',
-      date: new Date().toISOString(),
-    },
-    {
-      id: uuidv4(),
-      title: 'Log 03',
-      body: 'Log 03',
-      date: new Date().toISOString(),
-    },
-    {
-      id: uuidv4(),
-      title: 'Log 02',
-      body: 'Log 02',
-      date: new Date().toISOString(),
-    },
-    {
-      id: uuidv4(),
-      title: 'Log 01',
-      body: 'Log 01',
-      date: new Date().toISOString(),
-    },
-  ]);
+  const initialLogsRef = useRef(null);
+  const [logs, setLogs] = useState([]);
 
   Array.from({length: 10})
     .map((_, index) => ({
@@ -69,6 +40,25 @@ export function LogContextProvider({children}) {
     const nextLogs = logs.filter(log => log.id !== id);
     setLogs(nextLogs);
   };
+
+  useEffect(() => {
+    // useEffect 내에서 async 함수를 만들고 바로 호출
+    // IIFE 패턴
+    (async () => {
+      const savedLogs = await logsStorage.get();
+      if (savedLogs) {
+        initialLogsRef.current = savedLogs;
+        setLogs(savedLogs);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (logs === initialLogsRef.current) {
+      return;
+    }
+    logsStorage.set(logs);
+  }, [logs]);
 
   return (
     <LogContext.Provider value={{logs, onCreate, onModify, onRemove}}>
